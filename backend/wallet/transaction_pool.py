@@ -1,11 +1,14 @@
+from backend.wallet.transaction import Transaction
+
 class TransactionPool:
     def __init__(self):
         self.transaction_map = {}
     
     def set_transaction(self, transaction):
         """
-        Set a transaction in the transaction pool
+        Validate and set a transaction in the transaction pool
         """
+        Transaction.is_valid_transaction(transaction)
         self.transaction_map[transaction.id] = transaction
 
     def existing_transaction(self, address):
