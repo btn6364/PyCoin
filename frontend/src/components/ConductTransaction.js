@@ -41,7 +41,7 @@ function ConductTransaction() {
             <Link to='/'>Home</Link>
             <hr />
             <br />
-            <MDBContainer style={{justifyContent: 'center'}}>
+            <MDBContainer>
                 <MDBRow>
                     <MDBCol md="6">
                         <form>
