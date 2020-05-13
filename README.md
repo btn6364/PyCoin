@@ -2,6 +2,12 @@
 
 Build a cryptocurrency api from scratch using blockchain technology. 
 
+The API support the following operations of a crytocurrency:
+1. Conduct a Transaction to a known address. 
+2. Mine a block with from the Transaction Pool. 
+3. See the full list of the blockchain. 
+4. See the wallet information. 
+
 ### Activate the virual environment
 
 ```

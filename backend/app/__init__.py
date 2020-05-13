@@ -89,7 +89,7 @@ def route_wallet_transact():
 
 @app.route("/wallet/info")
 def route_wallet_info():
-    return jsonify({"address": wallet.address, "balance": wallet.balance, "public_key": wallet.public_key})
+    return jsonify({"address": wallet.address, "balance": wallet.balance})
 
 
 @app.route("/transactions")

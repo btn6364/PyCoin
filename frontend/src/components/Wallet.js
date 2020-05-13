@@ -11,16 +11,16 @@ function Wallet(){
         .then(json => setWalletInfo(json));
     }, []);
     //destructure walletInfo to get address and balance
-    const { address, balance, public_key } = walletInfo;
-    const abcxyz = "abcxyz"
+    const { address, balance } = walletInfo;
     return (
         <div className="App">
             <Link to='/'>Home</Link>
             <hr />
+            <h3>Wallet information</h3>
+            <br />
             <div className="WalletInfo">
                 <div>Address: {address} </div>
                 <div>Balance: {balance} </div>
-                <div>Public_key: {abcxyz} </div>
             </div>
         </div>
         
