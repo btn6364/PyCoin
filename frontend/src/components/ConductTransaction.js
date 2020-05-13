@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FormGroup, FormControl, Button} from 'react-bootstrap';
+import { Container, Button, Form, Jumbotron} from 'react-bootstrap';
 import { API_BASE_URL } from '../config';
 import history from '../history';
 
@@ -40,19 +40,28 @@ function ConductTransaction() {
         <div className="ConductTransaction">
             <Link to='/'>Home</Link>
             <hr />
-            <h3>Conduct a Transaction</h3>
             <br />
-            <FormGroup>
-                <FormControl input="text" placeholder="recipient" value={recipient} onChange={ updateRecipient }/>
-            </FormGroup>
+            <Jumbotron>
+                <Container>
+                    <Form>
+                        <h2>Conduct Transaction</h2>
+                        <Form.Group>
+                            <Form.Label>Recipient</Form.Label>
+                            <Form.Control input="text" placeholder="recipient" value={recipient} onChange={ updateRecipient }/>
+                        </Form.Group>
 
-            <FormGroup>
-                <FormControl input="number" placeholder="amount" value={amount} onChange={ updateAmount }/>
-            </FormGroup>
+                        <Form.Group>
+                            <Form.Label>Amount</Form.Label>
+                            <Form.Control input="number" placeholder="amount" value={amount} onChange={ updateAmount }/>
+                        </Form.Group>
 
-            <div>
-                <Button variant="danger" onClick={ submitTransaction }>Submit</Button>
-            </div>
+                        <div>
+                            <Button variant="danger" onClick={ submitTransaction }>Submit</Button>
+                        </div>
+                    </Form>
+                </Container>
+                
+            </Jumbotron>
             <br />
             <h4>Known Addresses</h4>
             <div>

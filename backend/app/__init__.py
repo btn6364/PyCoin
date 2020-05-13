@@ -11,6 +11,9 @@ from backend.wallet.transaction import Transaction
 from backend.wallet.transaction_pool import TransactionPool
 from backend.pubsub import PubSub
 
+#######################
+# APP SET UP
+#######################
 app = Flask(__name__)
 CORS(app, resources = {r'/*': {'origins': 'http://localhost:3000'}})
 blockchain = Blockchain()
@@ -18,6 +21,9 @@ wallet = Wallet(blockchain)
 transaction_pool = TransactionPool()
 pubsub = PubSub(blockchain, transaction_pool)
 
+#######################
+# ROUTE HANDLER
+#######################
 @app.route("/")
 def route_default():
     return "Welcome to the blockchain"
@@ -29,7 +35,6 @@ def route_blockchain():
 @app.route("/blockchain/length")
 def route_blockchain_length():
     return jsonify(len(blockchain.chain))
-
 
 @app.route("/known-addresses")
 def route_known_addresses():
@@ -48,7 +53,6 @@ def route_blockchain_range():
     return jsonify(blockchain.to_json()[::-1][start:end])
 
 
-
 @app.route("/blockchain/mine")
 def route_blockchain_mine():
     transaction_data = transaction_pool.transaction_data()
@@ -59,6 +63,7 @@ def route_blockchain_mine():
     transaction_pool.clear_blockchain_transactions(blockchain)
 
     return jsonify(block.to_json())
+
 
 @app.route("/wallet/transact", methods=["POST"])
 def route_wallet_transact():
@@ -81,13 +86,22 @@ def route_wallet_transact():
 
     return jsonify(transaction.to_json())
 
+
 @app.route("/wallet/info")
 def route_wallet_info():
-    return jsonify({"address": wallet.address, "balance": wallet.balance})
+    return jsonify({"address": wallet.address, "balance": wallet.balance, "public_key": wallet.public_key})
+
 
 @app.route("/transactions")
 def route_transactions():
     return jsonify(transaction_pool.transaction_data())
+
+
+
+
+#########################
+# RUN PEER APPLICATION
+#########################
 
 ROOT_PORT = 5000
 PORT = ROOT_PORT
@@ -103,17 +117,24 @@ if os.environ.get("PEER") == "True":
     except Exception as e:
         print(f"\n -- Error synchronizing: {e}")
 
+#############################
+# RUN SEED_DATA APPLICATION
+#############################
+
 if os.environ.get("SEED_DATA") == "True":
     for i in range(10):
         blockchain.add_block([
             Transaction(Wallet(), Wallet().address, random.randint(2, 50)).to_json(), 
             Transaction(Wallet(), Wallet().address, random.randint(2, 50)).to_json(),
         ])
-
     for i in range(3):
         transaction_pool.set_transaction(
             Transaction(Wallet(), Wallet().address, random.randint(2, 50))
         )
 
+
+##############################
+# RUN THE APPLICATION
+##############################
 app.run(port=PORT)
 

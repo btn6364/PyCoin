@@ -7,6 +7,7 @@ import App from './components/App';
 import Blockchain from './components/Blockchain';
 import ConductTransaction from './components/ConductTransaction';
 import TransactionPool from './components/TransactionPool';
+import Wallet from './components/Wallet';
 
 ReactDOM.render(
   <Router history={history}>
@@ -15,6 +16,7 @@ ReactDOM.render(
       <Route path="/blockchain" component={Blockchain} />
       <Route path="/conduct-transaction" component={ConductTransaction} />
       <Route path="/transaction-pool" component={TransactionPool} />
+      <Route path="/wallet-info" component={Wallet} />
     </Switch>
   </Router>,
   document.getElementById('root')
