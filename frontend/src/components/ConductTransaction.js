@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Button, Form, Jumbotron} from 'react-bootstrap';
 import { API_BASE_URL } from '../config';
 import history from '../history';
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBIcon, MDBInput } from 'mdbreact';
 
 function ConductTransaction() {
     const [amount, setAmount] = useState(0);
@@ -41,29 +41,23 @@ function ConductTransaction() {
             <Link to='/'>Home</Link>
             <hr />
             <br />
-            <Jumbotron>
-                <Container>
-                    <Form>
-                        <h2>Conduct Transaction</h2>
-                        <Form.Group>
-                            <Form.Label>Recipient</Form.Label>
-                            <Form.Control input="text" placeholder="recipient" value={recipient} onChange={ updateRecipient }/>
-                        </Form.Group>
-
-                        <Form.Group>
-                            <Form.Label>Amount</Form.Label>
-                            <Form.Control input="number" placeholder="amount" value={amount} onChange={ updateAmount }/>
-                        </Form.Group>
-
-                        <div>
-                            <Button variant="danger" onClick={ submitTransaction }>Submit</Button>
-                        </div>
-                    </Form>
-                </Container>
-                
-            </Jumbotron>
-            <br />
-            <h4>Known Addresses</h4>
+            <MDBContainer style={{justifyContent: 'center'}}>
+                <MDBRow>
+                    <MDBCol md="6">
+                        <form>
+                            <p className="h5 text-center mb-4">Conduct Transaction</p>
+                            <div className="grey-text">
+                                <MDBInput label="Recipient" placeholder="recipient" icon="user" group type="text" validate error="wrong" success="right" value={recipient} onChange={ updateRecipient }/>
+                                <MDBInput label="Amount"  placeholder="amount" icon="envelope" group type="number" validate error="wrong" success="right" value={amount} onChange={ updateAmount } />
+                            </div>
+                            <div className="text-center">
+                                <MDBBtn outline color="info" onClick={ submitTransaction }>Send<MDBIcon far icon="paper-plane" className="ml-1" /></MDBBtn>
+                            </div>
+                        </form>
+                    </MDBCol>
+                </MDBRow>
+            </MDBContainer>
+        <h4>Known Addresses</h4>
             <div>
                 {
                     knownAddresses.map((knownAddress, i) => (
@@ -72,7 +66,7 @@ function ConductTransaction() {
                         </span>
                     ))
                 }
-            </div>
+            </div> 
         </div>
     )
 }

@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png';
-
+import wallet from '../assets/wallet.png';
 
 function App() {
   return (
     <div className="App">
-      <img className="logo" src={ logo } alt="application-logo"/>
+      <img className="logo" src={ wallet } alt="application-logo"/>
       <h3>Welcome to PyCoin!</h3>
       <br />
       <Link to="/blockchain">Blockchain</Link>
